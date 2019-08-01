@@ -6,9 +6,9 @@ import { addPostCreator, updateNewPosts } from './../../../redux/posts-reducer';
 const MyPosts = (props) => {
 
 
-    let postTemplate = props.posts.map((post) => {
+    let postTemplate = props.posts.map((post, index) => {
         return (
-            <Post message={post.text} likeCount={post.likeCount} />
+            <Post message={post.text} likeCount={post.likeCount} key={index} />
         );
     });
 

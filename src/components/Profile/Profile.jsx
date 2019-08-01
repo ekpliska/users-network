@@ -13,11 +13,6 @@ const Profile = (props) => {
                 store={props}
                 dispatch={props.dispatch}
             ></MyPostsContainer>
-            {/* <MyPosts
-                posts={props.posts.posts}
-                dispatch={props.dispatch}
-                newPostText={props.posts.newPostText}>
-            </MyPosts> */}
         </div>
     )
 }

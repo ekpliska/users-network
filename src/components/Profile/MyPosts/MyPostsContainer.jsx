@@ -4,21 +4,21 @@ import MyPosts from './MyPosts';
 
 const MyPostsContainer = (props) => {
     // debugger;
-    let state = props.getState();
-
+    
+    let state = props.store;
     let welcomeMessage = () => {
-        props.store.dispatch(addPostCreator());
+        state.dispatch(addPostCreator());
     }
 
     let changeNewPost = (currentText) => {
-        props.store.dispatch(updateNewPosts(currentText));
+        state.dispatch(updateNewPosts(currentText));
     }
 
     return (
         <MyPosts
             updateNewPosts={changeNewPost}
             addPostCreator={welcomeMessage}
-            posts={state.profilePage.posts}
+            posts={state.state.profilePage.posts}
         ></MyPosts>
     )
 }
