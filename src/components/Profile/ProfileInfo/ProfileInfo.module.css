@@ -1,0 +1,11 @@
+.profile {
+    height: 150px;
+    background-color: #fff;
+    display: grid;
+    grid-template-columns: 20% 80%;
+    padding: 10px;
+}
+.profileImage img {
+    background-color: brown;
+    height: 150px;
+}
