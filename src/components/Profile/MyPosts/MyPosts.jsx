@@ -3,9 +3,9 @@ import Post from './Post/Post';
 import stylesMyPost from './MyPosts.module.css';
 import { addPostCreator, updateNewPosts } from './../../../redux/posts-reducer';
 
-const MyPosts = (props) => {
+const MyPosts = ({ posts, addPost, updatePosts = f => f }) => {
     
-    const { posts, addPost, updatePosts } = props;
+    // const { posts, addPost, updatePosts } = props;
     // debugger;
 
     let postTemplate = posts.posts.map((post, index) => {
@@ -17,14 +17,12 @@ const MyPosts = (props) => {
     let MessageText = React.createRef();
 
     let welcomeMessage = () => {
-        let text = MessageText.current.value;
-        // props.dispatch(addPostCreator());
-        addPost();
+        let currentText = MessageText.current.value;
+        addPost(currentText);
     }
 
     let changeNewPost = () => {
         let currentText = MessageText.current.value;
-        // props.dispatch(updateNewPosts(currentText));
         updatePosts(currentText);
     }
 
@@ -32,7 +30,7 @@ const MyPosts = (props) => {
         <div className={stylesMyPost.postsContent}>
             <div>
                 <div>
-                    <textarea ref={MessageText} onChange={changeNewPost} value={props.newPostText}></textarea>
+                    <textarea ref={MessageText} onChange={changeNewPost} value={posts.newPostText}></textarea>
                 </div>
                 <div>
                     <button onClick={welcomeMessage}>Add Post</button>
