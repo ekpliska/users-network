@@ -4,21 +4,23 @@ import './index.css';
 import App from './App';
 import { BrowserRouter, Route } from 'react-router-dom';
 import store from './redux/redux-store';
+import { Provider } from 'react-redux';
 
 console.log(store.getState());
 
-let rerenderEntireTree = (state) => {
+let rerenderEntireTree = () => {
 	ReactDOM.render(
 		<BrowserRouter>
-			<App state={state} dispatch={store.dispatch.bind(store)} />
+			<Provider store={store}>
+				<App />
+			</Provider>
 		</BrowserRouter>, document.getElementById('root'));
 }
 
-rerenderEntireTree(store.getState());
+rerenderEntireTree();
 
 store.subscribe(() => {
-	let state = store.getState();
-	rerenderEntireTree(state);
+	rerenderEntireTree();
 });
 
 // If you want your app to work offline and load faster, you can change

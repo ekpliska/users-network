@@ -1,27 +1,26 @@
 // Контейнерная компонента
 
-import React from 'react';
 import { sendMessage, updateNewMessage } from './../../redux/dialogs-reducer';
 import Dialogs from './Dialogs';
+import { connect } from 'react-redux';
 
-const DialogsContainer = (props) => {
-
-    let changeMessage = (currentMessage) => { 
-        props.dispatch(updateNewMessage(currentMessage));
+const mapStateToProps = (state) => {
+    return {
+        users: state.userData.users,
+        messages: state.dialogsPage,
     }
-
-    let sendNewMessage = () => { 
-        props.dispatch(sendMessage());
-    }
-
-    return (
-        <Dialogs
-            users={props.users}
-            messages={props.messages.messages}
-            onChangeMessage={changeMessage}
-            onSendMessage={sendNewMessage}
-        />
-    );
 }
+const mapDispatchToProps = (dispatch) => {
+    return {
+        onChangeMessage: (currentMessage) => {
+            dispatch(updateNewMessage(currentMessage))
+        },
+        onSendMessage: () => {
+            dispatch(sendMessage())
+        },
+    }
+}
+
+const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs);
 
 export default DialogsContainer;

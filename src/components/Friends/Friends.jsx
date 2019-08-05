@@ -3,9 +3,9 @@ import FriendStyle from './Friends.module.css';
 
 const Friends = (props) => {
 
-	// debugger;
+    const { friendList } = props;
 
-    let userFriend = props.friendList.friendBlock.friendsWidget.map((friend, index) => {
+    let userFriend = friendList.friendList.map((friend, index) => {
 		return (
 			<div key={index}>
 				<div className={FriendStyle.friendContent}>

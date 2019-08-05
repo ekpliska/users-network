@@ -5,7 +5,11 @@ import MessageItem from './MessageItem/MessageItem';
 
 const Dialogs = (props) => {
 
-    const { users, messages, newDialogMessage, onSendMessage, onChangeMessage } = props;
+    const users = props.users;
+    const messages = props.messages.messages;
+    const newDialogMessage = props.messages.newDialogMessage;
+    
+    const { onSendMessage, onChangeMessage } = props;
 
     let userTmplate = users.map((user, index) => {
         return (
@@ -41,7 +45,7 @@ const Dialogs = (props) => {
                         {messageTemplate}
                         <div>
                             <div>
-                                <textarea ref={textMessage} onChange={changeMessage} value={props.newDialogMessage}></textarea>
+                                <textarea ref={textMessage} onChange={changeMessage} value={newDialogMessage}></textarea>
                             </div>
                             <div>
                                 <button onClick={sendNewMessage}>Send</button>

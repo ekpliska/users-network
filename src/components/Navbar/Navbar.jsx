@@ -2,6 +2,7 @@ import React from 'react';
 import StylesNavbar from './Navbar.module.css';
 import { NavLink } from 'react-router-dom';
 import Friends from '../Friends/Friends';
+import { connect } from 'react-redux';
 
 const Navbar = (props) => {
     return (
@@ -28,4 +29,10 @@ const Navbar = (props) => {
     )
 }
 
-export default Navbar;
+const mapStateToProps = (state) => {
+    return {
+        friendList: state.friendsWidget.friendsWidget,
+    }
+}
+
+export default connect(mapStateToProps)(Navbar);

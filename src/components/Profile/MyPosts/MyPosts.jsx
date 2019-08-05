@@ -4,9 +4,11 @@ import stylesMyPost from './MyPosts.module.css';
 import { addPostCreator, updateNewPosts } from './../../../redux/posts-reducer';
 
 const MyPosts = (props) => {
+    
+    const { posts, addPost, updatePosts } = props;
+    // debugger;
 
-
-    let postTemplate = props.posts.map((post, index) => {
+    let postTemplate = posts.posts.map((post, index) => {
         return (
             <Post message={post.text} likeCount={post.likeCount} key={index} />
         );
@@ -17,13 +19,13 @@ const MyPosts = (props) => {
     let welcomeMessage = () => {
         let text = MessageText.current.value;
         // props.dispatch(addPostCreator());
-        props.addPostCreator();
+        addPost();
     }
 
     let changeNewPost = () => {
         let currentText = MessageText.current.value;
         // props.dispatch(updateNewPosts(currentText));
-        props.updateNewPosts(currentText);
+        updatePosts(currentText);
     }
 
     return (
