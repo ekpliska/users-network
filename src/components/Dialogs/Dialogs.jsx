@@ -1,21 +1,21 @@
 import React from 'react';
 import StyleDialogs from './Dialogs.module.css';
-import { NavLink } from 'react-router-dom'; 
 import DialogItem from './DialogItem/DialogItem';
 import MessageItem from './MessageItem/MessageItem';
-import { sendMessage, updateNewMessage } from './../../redux/dialogs-reducer';
 
 const Dialogs = (props) => {
 
-    let userTmplate = props.users.map((user) => {
+    const { users, messages, newDialogMessage, onSendMessage, onChangeMessage } = props;
+
+    let userTmplate = users.map((user, index) => {
         return (
-            <DialogItem userName={user.userName} userId={user.id} photo={user.photo} />
+            <DialogItem key={index} userName={user.userName} userId={user.id} photo={user.photo} />
         );
     });
 
-    let messageTemplate = props.messages.messages.map((message) => {
+    let messageTemplate = messages.map((message, index) => {
         return (
-            <MessageItem userMessage={message.text} messageStatus={message.status} />
+            <MessageItem key={index} userMessage={message.text} messageStatus={message.status} />
         );
     });
 
@@ -23,12 +23,11 @@ const Dialogs = (props) => {
 
     let changeMessage = () => { 
         let currentMessage = textMessage.current.value;
-        props.dispatch(updateNewMessage(currentMessage));
+        onChangeMessage(currentMessage);
     }
 
     let sendNewMessage = () => { 
-        let message = textMessage.current.value;
-        props.dispatch(sendMessage());
+        onSendMessage();
     }
 
     return (
