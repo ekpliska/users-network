@@ -3,14 +3,8 @@ import StyleDialogs from './Dialogs.module.css';
 import DialogItem from './DialogItem/DialogItem';
 import MessageItem from './MessageItem/MessageItem';
 
-const Dialogs = (props) => {
-
-    const users = props.users;
-    const messages = props.messages.messages;
-    const newDialogMessage = props.messages.newDialogMessage;
-    
-    const { onSendMessage, onChangeMessage } = props;
-
+const Dialogs = ({ users, messages, newDialogMessage, onSendMessage, onChangeMessage }) => {
+     
     let userTmplate = users.map((user, index) => {
         return (
             <DialogItem key={index} userName={user.userName} userId={user.id} photo={user.photo} />

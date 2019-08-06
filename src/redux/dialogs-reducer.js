@@ -8,7 +8,7 @@ let initialStat = {
         { id: 2, text: "Как дела?", status: "my_message" },
         { id: 3, text: "Хорошо", status: "user_message" }
     ],
-    newDialogMessage: ""
+    newDialogMessage: "You message..."
 };
 
 const dialogReducer = (state = initialStat, action) => {
@@ -20,10 +20,10 @@ const dialogReducer = (state = initialStat, action) => {
                 text: state.newDialogMessage,
                 status: 'new_message'
             };
-            state.messages.push(newMessage);
-            state.newDialogMessage = '';
             return {
-                ...state
+                ...state,
+                messages: [...state.messages, newMessage],
+                newDialogMessage: ''
             };
         case UPDATE_NEW_MESSAGE:
             return {

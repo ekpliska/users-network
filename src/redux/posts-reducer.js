@@ -18,10 +18,10 @@ const postsReducer = (state = initialState, action) => {
                 text: state.newPostText,
                 likeCount: 0
             };
-            state.posts.push(newPost);
-            state.newPostText = '';
             return {
-                ...state
+                ...state,
+                posts: [...state.posts, newPost],
+                newPostText: ''
             };
         case UPDATE_NEW_POST:
             return {

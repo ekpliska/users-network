@@ -1,13 +1,9 @@
 import React from 'react';
 import Post from './Post/Post';
 import stylesMyPost from './MyPosts.module.css';
-import { addPostCreator, updateNewPosts } from './../../../redux/posts-reducer';
 
-const MyPosts = ({ posts, addPost, updatePosts = f => f }) => {
+const MyPosts = ({ posts, addPost, newPostText, updatePosts = f => f }) => {
     
-    // const { posts, addPost, updatePosts } = props;
-    // debugger;
-
     let postTemplate = posts.posts.map((post, index) => {
         return (
             <Post message={post.text} likeCount={post.likeCount} key={index} />
@@ -30,7 +26,7 @@ const MyPosts = ({ posts, addPost, updatePosts = f => f }) => {
         <div className={stylesMyPost.postsContent}>
             <div>
                 <div>
-                    <textarea ref={MessageText} onChange={changeNewPost} value={posts.newPostText}></textarea>
+                    <textarea ref={MessageText} onChange={changeNewPost} value={newPostText}></textarea>
                 </div>
                 <div>
                     <button onClick={welcomeMessage}>Add Post</button>
