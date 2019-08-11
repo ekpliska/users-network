@@ -18,19 +18,7 @@ const SET_USERS = 'SET_USERS';
 // ]
 
 const initialState = {
-    users: [
-        {
-            id: 1,
-            fullName: 'UserName',
-            pathInfo: 'https://...',
-            status: 'User status',
-            follow: false,
-            location: {
-                country: 'Country Name',
-                city: 'City name',
-            }
-        }
-    ]
+    users: []
 }
 
 const userListReducer = (state = initialState, action) => {
