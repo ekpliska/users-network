@@ -3,7 +3,7 @@ const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET_USERS';
 
 
-// users: [
+// const users = [
 //     {
 //         id: 1,
 //         fullName: 'UserName',
@@ -18,7 +18,19 @@ const SET_USERS = 'SET_USERS';
 // ]
 
 const initialState = {
-    users: null
+    users: [
+        {
+            id: 1,
+            fullName: 'UserName',
+            pathInfo: 'https://...',
+            status: 'User status',
+            follow: false,
+            location: {
+                country: 'Country Name',
+                city: 'City name',
+            }
+        }
+    ]
 }
 
 const userListReducer = (state = initialState, action) => {
@@ -26,9 +38,9 @@ const userListReducer = (state = initialState, action) => {
         case FOLLOW:
             return {
                 ...state,
-                users: [...state.users].filter((user) => {
+                users: state.users.map((user) => {
                     if (user.id === action.userId) {
-                        return { ...user, follow: true };
+                        return { ...user, follow: false };
                     }
                     return user;
                 })
@@ -36,9 +48,9 @@ const userListReducer = (state = initialState, action) => {
         case UNFOLLOW:
             return {
                 ...state,
-                users: [...state.users].filter((user) => {
+                users: state.users.map((user) => {
                     if (user.id === action.userId) {
-                        return {...user, follow: false}
+                        return { ...user, follow: true }
                     }
                     return user;
                 })

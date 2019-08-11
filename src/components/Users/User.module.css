@@ -1,0 +1,11 @@
+.userBlockInfo {
+    display: grid;
+    grid-template-columns: 120px 1fr 1fr 30px;
+    grid-gap: 10px;
+    margin: 0;
+}
+.userLeft {
+    text-align: left;
+    padding: 10px;
+}
+.userRight {}
