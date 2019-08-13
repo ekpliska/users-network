@@ -2,21 +2,6 @@ const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET_USERS';
 
-
-// const users = [
-//     {
-//         id: 1,
-//         fullName: 'UserName',
-//         pathInfo: 'https://...',
-//         status: 'User status',
-//         follow: false,
-//         location: {
-//             country: 'Country Name',
-//             city: 'City name',
-//         }
-//     }
-// ]
-
 const initialState = {
     users: []
 }
@@ -28,7 +13,7 @@ const userListReducer = (state = initialState, action) => {
                 ...state,
                 users: state.users.map((user) => {
                     if (user.id === action.userId) {
-                        return { ...user, follow: false };
+                        return { ...user, followed: false };
                     }
                     return user;
                 })
@@ -38,7 +23,7 @@ const userListReducer = (state = initialState, action) => {
                 ...state,
                 users: state.users.map((user) => {
                     if (user.id === action.userId) {
-                        return { ...user, follow: true }
+                        return { ...user, followed: true }
                     }
                     return user;
                 })

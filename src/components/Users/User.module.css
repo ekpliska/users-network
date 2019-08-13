@@ -1,11 +1,43 @@
 .userBlockInfo {
     display: grid;
-    grid-template-columns: 120px 1fr 1fr 30px;
+    grid-template-columns: 10% 50% 10%;
     grid-gap: 10px;
     margin: 0;
+    padding: 10px;
 }
 .userLeft {
     text-align: left;
     padding: 10px;
 }
 .userRight {}
+
+.userImage img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50px;
+    text-align: center;
+}
+.userInfo p:first-child {
+    font-weight: bold;
+}
+.userInfo p {
+    padding: 0;
+    margin: 0;
+}
+
+.btn_follow {
+    padding: 5px 20px;
+    border-radius: 50px;
+    background-color: darkorange;
+    border: none;
+    color: #fff;
+    outline: none;
+}
+.btn_unfollow {
+    padding: 5px 20px;
+    border-radius: 50px;
+    background-color: chocolate;
+    border: none;
+    color: #fff;
+    outline: none;
+}

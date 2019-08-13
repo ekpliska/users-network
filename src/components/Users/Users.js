@@ -1,34 +1,16 @@
 import React from 'react';
 import User from './User';
+import * as axios from 'axios';
 
 const Users = (props) => {
     const { users, followClick, unFollowClick, allUsers } = props;
     if (users.length === 0) {
-        allUsers([
-            {
-                id: 1,
-                fullName: 'UserName',
-                pathInfo: 'https://...',
-                status: 'User status',
-                follow: false,
-                location: {
-                    country: 'Country Name',
-                    city: 'City name',
-                }
-            },
-            {
-                id: 2,
-                fullName: 'UserName 2',
-                pathInfo: 'https://...',
-                status: 'User status 2',
-                follow: true,
-                location: {
-                    country: 'Country Name 2',
-                    city: 'City name 3',
-                }
-            },
-        ]);
+        axios.get('https://social-network.samuraijs.com/api/1.0/users')
+            .then((response) => {
+                allUsers(response.data.items)
+            });
     }
+
     return (
         <div>
             {
