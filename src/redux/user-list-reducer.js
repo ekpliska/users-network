@@ -3,7 +3,8 @@ const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET_USERS';
 
 const initialState = {
-    users: []
+    users: [],
+    isLoading: false,
 }
 
 const userListReducer = (state = initialState, action) => {
@@ -32,7 +33,8 @@ const userListReducer = (state = initialState, action) => {
             return {
                 ...state,
                 // Объединени двух массивов
-                users: [...state.users, ...action.users]
+                users: [...state.users, ...action.users],
+                isLoading: true
             }
         default:
             return state;

@@ -1,5 +1,5 @@
 import React from 'react';
-import StylesNews from './News.module.css';
+// import StylesNews from './News.module.css';
 
 const News = () => {
     return (

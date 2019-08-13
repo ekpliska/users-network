@@ -1,4 +1,3 @@
-import React from 'react';
 import Users from './Users';
 import { connect } from 'react-redux';
 import { followAction, unFollowAction, setUsers } from '../../redux/user-list-reducer';
@@ -7,7 +6,8 @@ const mapStateToProps = (state) => {
     console.log(state.userListPage);
     
     return {
-        users: state.userListPage.users
+        users: state.userListPage.users,
+        isLoading: state.userListPage.isLoading,
     }
 }
 
