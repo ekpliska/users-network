@@ -8,6 +8,9 @@ const mapStateToProps = (state) => {
     return {
         users: state.userListPage.users,
         isLoading: state.userListPage.isLoading,
+        currentPage: state.userListPage.currentPage,
+        countUsers: state.userListPage.countUsers,
+        totalCount: state.userListPage.totalCount,
     }
 }
 
@@ -15,7 +18,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         followClick: (userId) => dispatch(followAction(userId)),
         unFollowClick: (userId) => dispatch(unFollowAction(userId)),
-        allUsers: (users) => dispatch(setUsers(users))
+        allUsers: (users, totalCount, currentPage) => dispatch(setUsers(users, totalCount, currentPage))
     }
 }
 

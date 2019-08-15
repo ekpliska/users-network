@@ -5,6 +5,9 @@ const SET_USERS = 'SET_USERS';
 const initialState = {
     users: [],
     isLoading: false,
+    currentPage: 1,
+    countUsers: 10,
+    totalCount: 0,
 }
 
 const userListReducer = (state = initialState, action) => {
@@ -33,8 +36,10 @@ const userListReducer = (state = initialState, action) => {
             return {
                 ...state,
                 // Объединени двух массивов
-                users: [...state.users, ...action.users],
-                isLoading: true
+                users: action.users,
+                isLoading: true,
+                totalCount: action.totalCount,
+                currentPage: action.currentPage
             }
         default:
             return state;
@@ -51,9 +56,11 @@ export const unFollowAction = (userId) => ({
     userId: userId
 });
 
-export const setUsers = (users) => ({
+export const setUsers = (users, totalCount, currentPage) => ({
     type: SET_USERS,
-    users: users
+    users: users,
+    totalCount: totalCount,
+    currentPage: currentPage
 });
 
 export default userListReducer;
