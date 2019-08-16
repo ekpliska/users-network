@@ -1,6 +1,32 @@
-import Users from './Users';
+import React from 'react';
 import { connect } from 'react-redux';
 import { followAction, unFollowAction, setUsers } from '../../redux/user-list-reducer';
+import * as axios from 'axios';
+import Users from './Users';
+
+class UsersContainer extends React.Component {
+
+    componentDidMount() {
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.countUsers}`)
+            .then((response) => {
+                this.props.allUsers(response.data.items, response.data.totalCount, this.props.currentPage)
+            });
+    }
+
+    changePage = (pageNumber) => {
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.countUsers}`)
+            .then((response) => {
+                this.props.allUsers(response.data.items, response.data.totalCount, pageNumber)
+            });
+    }
+
+    render() {
+        return (
+            <Users {...this.props} changePage={this.changePage} />
+        )
+    }
+
+}
 
 const mapStateToProps = (state) => {
     console.log(state.userListPage);
@@ -22,6 +48,6 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-const UserContainer = connect(mapStateToProps, mapDispatchToProps)(Users);
+const UserContainer = connect(mapStateToProps, mapDispatchToProps)(UsersContainer);
 
 export default UserContainer;
