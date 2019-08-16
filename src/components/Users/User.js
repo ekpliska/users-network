@@ -6,7 +6,7 @@ const User = ({ id, name, photos, status, followed, followClick, unFollowClick }
 	return (
 		<div className={UserStyle.userBlockInfo}>
 			<div className={UserStyle.userImage}>
-                <img src={photos.small ? photos.small : notPhoto} />
+                <img src={photos.small ? photos.small : notPhoto} alt="" />
 			</div>
 			<div className={UserStyle.userInfo}>
 				<p>{name}</p>

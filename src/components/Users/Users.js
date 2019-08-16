@@ -1,6 +1,7 @@
 import React from 'react';
 import User from './User';
 import UserStyle from './User.module.css';
+import Preloader from '../../common/Preloader';
 
 const Users = (props) => {
 
@@ -33,7 +34,7 @@ const Users = (props) => {
             <div>
                 {
                     (isLoading === false)
-                        ? <p>Users are loading... wait</p>
+                        ? <Preloader />
                         : users.map((user) => {
                             return <User
                                 key={user.id}
