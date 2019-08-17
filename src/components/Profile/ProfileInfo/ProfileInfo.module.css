@@ -2,10 +2,13 @@
     height: 150px;
     background-color: #fff;
     display: grid;
-    grid-template-columns: 20% 80%;
+    grid-template-columns: 30% 80%;
     padding: 10px;
 }
 .profileImage img {
     background-color: brown;
     height: 150px;
+}
+.profileInfo {
+    padding: 0 20px;
 }

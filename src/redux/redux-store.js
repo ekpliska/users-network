@@ -4,13 +4,15 @@ import dialogReducer from './dialogs-reducer';
 import friendsReducer from './friend-reducer';
 import userReducer from './user-reducer';
 import userListReducer from './user-list-reducer';
+import ProfileReducer from './profile-reducer';
 
 let reducers = combineReducers({
     userData: userReducer,
-    profilePage: postsReducer,
+    postsPage: postsReducer,
     dialogsPage: dialogReducer,
     friendsWidget: friendsReducer,
     userListPage: userListReducer,
+    profileUser: ProfileReducer,
 });
 
 let store = createStore(reducers);
