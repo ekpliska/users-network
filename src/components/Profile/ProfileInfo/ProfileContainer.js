@@ -4,14 +4,15 @@ import { connect } from 'react-redux';
 import { getProfileUser } from '../../../redux/profile-reducer';
 import ProfileInfo from './ProfileInfo';
 import { withRouter } from 'react-router-dom'
+import api from '../../../api';
 
 class ProfileInfoContainer extends React.Component {
 
     componentDidMount() {
         const userId = this.props.match.params.userId ? this.props.match.params.userId : 2;
-        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`)
-            .then((response) => {
-                this.props.getProfile(response.data)
+        api.userProfile(userId)
+            .then((data) => {
+                this.props.getProfile(data)
             });
 
     }
