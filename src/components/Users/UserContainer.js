@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { followAction, unFollowAction, setUsers } from '../../redux/user-list-reducer';
-import * as axios from 'axios';
+import { followAction, unFollowAction, setUsers, followingProgress } from '../../redux/user-list-reducer';
 import Users from './Users';
 import api from '../../api';
 
@@ -25,19 +24,23 @@ class UsersContainer extends React.Component {
     }
 
     onFollowClick = (userId) => {
+        this.props.setProgress(true, userId);
         api.followUser(userId)
             .then((data) => {
                 if (data.resultCode === 0) {
-                    this.props.followClick(userId)
+                    this.props.followClick(userId);
+                    this.props.setProgress(false, userId);
                 }
             });
     }
 
     onUnFollowClick = (userId) => {
+        this.props.setProgress(true, userId);
         api.unFollowUser(userId)
             .then((data) => {
                 if (data.resultCode === 0) {
-                    this.props.unFollowClick(userId)
+                    this.props.unFollowClick(userId);
+                    this.props.setProgress(false, userId);
                 }
             });
     }
@@ -56,14 +59,13 @@ class UsersContainer extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log(state.userListPage);
-    
     return {
         users: state.userListPage.users,
         isLoading: state.userListPage.isLoading,
         currentPage: state.userListPage.currentPage,
         countUsers: state.userListPage.countUsers,
         totalCount: state.userListPage.totalCount,
+        progress: state.userListPage.followingProgress,
     }
 }
 
@@ -71,7 +73,8 @@ const mapDispatchToProps = (dispatch) => {
     return {
         followClick: (userId) => dispatch(followAction(userId)),
         unFollowClick: (userId) => dispatch(unFollowAction(userId)),
-        allUsers: (users, totalCount, currentPage) => dispatch(setUsers(users, totalCount, currentPage))
+        allUsers: (users, totalCount, currentPage) => dispatch(setUsers(users, totalCount, currentPage)),
+        setProgress: (progress, userId) => dispatch(followingProgress(progress, userId))
     }
 }
 

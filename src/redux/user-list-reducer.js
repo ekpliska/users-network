@@ -1,6 +1,7 @@
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET_USERS';
+const FOLLOWING_PROPGRESS = 'FOLLOWING_PROPGRESS';
 
 const initialState = {
     users: [],
@@ -8,6 +9,7 @@ const initialState = {
     currentPage: 1,
     countUsers: 10,
     totalCount: 0,
+    followingProgress: []
 }
 
 const userListReducer = (state = initialState, action) => {
@@ -41,6 +43,14 @@ const userListReducer = (state = initialState, action) => {
                 totalCount: action.totalCount,
                 currentPage: action.currentPage
             }
+        case FOLLOWING_PROPGRESS: {
+            return {
+                ...state,
+                followingProgress: action.progress
+                    ? [...state.followingProgress, action.userId] 
+                    : state.followingProgress.filter((userId) => userId !== action.userId)
+            }
+        }
         default:
             return state;
     }
@@ -62,5 +72,11 @@ export const setUsers = (users, totalCount, currentPage) => ({
     totalCount: totalCount,
     currentPage: currentPage
 });
+
+export const followingProgress = (progress, userId) => ({
+    type: FOLLOWING_PROPGRESS,
+    progress,
+    userId
+})
 
 export default userListReducer;

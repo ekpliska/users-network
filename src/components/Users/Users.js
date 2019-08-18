@@ -5,7 +5,7 @@ import Preloader from '../../common/Preloader';
 
 const Users = (props) => {
 
-    const { users, isLoading, onFollowClick, onUnFollowClick, allUsers, totalCount, countUsers, currentPage } = props;
+    const { users, isLoading, onFollowClick, onUnFollowClick, allUsers, totalCount, countUsers, currentPage, progress } = props;
     const countPages = Math.ceil(totalCount / countUsers);
 
     let arrayPages = [];
@@ -44,6 +44,7 @@ const Users = (props) => {
                                 followClick={onFollowClick}
                                 unFollowClick={onUnFollowClick}
                                 allUsers={allUsers}
+                                progress={progress}
                             />
                         })
                 }
