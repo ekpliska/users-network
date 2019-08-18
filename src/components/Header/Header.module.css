@@ -5,3 +5,9 @@
 .header img {
     width: 50px;
 }
+.Login {
+  float: right;
+}
+.Login a {
+  color: blue;
+}
