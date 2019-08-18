@@ -5,7 +5,7 @@ import Preloader from '../../common/Preloader';
 
 const Users = (props) => {
 
-    const { users, isLoading, followClick, unFollowClick, allUsers, totalCount, countUsers, currentPage } = props;
+    const { users, isLoading, onFollowClick, onUnFollowClick, allUsers, totalCount, countUsers, currentPage } = props;
     const countPages = Math.ceil(totalCount / countUsers);
 
     let arrayPages = [];
@@ -22,7 +22,9 @@ const Users = (props) => {
                             <li
                                 className={currentPage === number ?
                                     UserStyle.active : ''}
-                                key={number} onClick={() => props.changePage(number)}>
+                                key={number}
+                                onClick={() => props.changePage(number)}
+                            >
 
                                 {number}
 
@@ -39,8 +41,8 @@ const Users = (props) => {
                             return <User
                                 key={user.id}
                                 {...user}
-                                followClick={followClick}
-                                unFollowClick={unFollowClick}
+                                followClick={onFollowClick}
+                                unFollowClick={onUnFollowClick}
                                 allUsers={allUsers}
                             />
                         })

@@ -18,8 +18,8 @@ const User = ({ id, name, photos, status, followed, followClick, unFollowClick }
 			<div className={UserStyle.userFollow}>
 				{
                     (followed)
-						? <button onClick={() => followClick(id)} className={UserStyle.btn_follow}>Follow</button>
-						: <button onClick={() => unFollowClick(id)} className={UserStyle.btn_unfollow}>Unfollow</button>
+						? <button onClick={() => unFollowClick(id)} className={UserStyle.btn_follow}>Follow</button>
+						: <button onClick={() => followClick(id)} className={UserStyle.btn_unfollow}>Unfollow</button>
 				}
 			</div>
 		</div>
