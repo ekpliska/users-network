@@ -1,48 +1,27 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { followAction, unFollowAction, setUsers, followingProgress } from '../../redux/user-list-reducer';
+import { follow, unFollow, getAllUsers, followingProgress } from '../../redux/user-list-reducer';
 import Users from './Users';
-import api from '../../api';
 
 class UsersContainer extends React.Component {
 
     componentDidMount() {
 
         const { currentPage, countUsers, allUsers } = this.props;
-        api.getUsers(currentPage, countUsers)
-            .then((data) => {
-                allUsers(data.items, data.totalCount, currentPage)
-            });
+        allUsers(currentPage, countUsers, allUsers);
     }
 
     changePage = (pageNumber) => {
         const { countUsers, allUsers } = this.props;
-        api.getUsers(pageNumber, countUsers)
-            .then((data) => {
-                allUsers(data.items, data.totalCount, pageNumber)
-            });
+        allUsers(pageNumber, countUsers, allUsers);
     }
 
     onFollowClick = (userId) => {
-        this.props.setProgress(true, userId);
-        api.followUser(userId)
-            .then((data) => {
-                if (data.resultCode === 0) {
-                    this.props.followClick(userId);
-                    this.props.setProgress(false, userId);
-                }
-            });
+        this.props.followClick(userId);
     }
 
     onUnFollowClick = (userId) => {
-        this.props.setProgress(true, userId);
-        api.unFollowUser(userId)
-            .then((data) => {
-                if (data.resultCode === 0) {
-                    this.props.unFollowClick(userId);
-                    this.props.setProgress(false, userId);
-                }
-            });
+        this.props.unFollowClick(userId);
     }
 
     render() {
@@ -71,9 +50,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        followClick: (userId) => dispatch(followAction(userId)),
-        unFollowClick: (userId) => dispatch(unFollowAction(userId)),
-        allUsers: (users, totalCount, currentPage) => dispatch(setUsers(users, totalCount, currentPage)),
+        followClick: (userId) => dispatch(follow(userId)),
+        unFollowClick: (userId) => dispatch(unFollow(userId)),
+        allUsers: (users, totalCount, currentPage) => dispatch(getAllUsers(users, totalCount, currentPage)),
         setProgress: (progress, userId) => dispatch(followingProgress(progress, userId))
     }
 }

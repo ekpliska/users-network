@@ -1,3 +1,5 @@
+import api from '../api';
+
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET_USERS';
@@ -77,6 +79,39 @@ export const followingProgress = (progress, userId) => ({
     type: FOLLOWING_PROPGRESS,
     progress,
     userId
-})
+});
+
+// create thunk
+export const getAllUsers = (currentPage, countUsers) => (dispatch) => {
+    return (
+        api.getUsers(currentPage, countUsers)
+            .then((data) => {
+                dispatch(setUsers(data.items, data.totalCount, currentPage))
+            })
+    )
+}
+
+export const follow = (userId) => (dispatch) => {
+    dispatch(followingProgress(true, userId));
+    api.followUser(userId)
+        .then((data) => {
+            if (data.resultCode === 0) {
+                dispatch(followAction(userId));
+                dispatch(followingProgress(false, userId));
+            }
+        });
+}
+
+export const unFollow = (userId) => (dispatch) => {
+    debugger;
+    dispatch(followingProgress(true, userId));
+    api.unFollowUser(userId)
+        .then((data) => {
+            if (data.resultCode === 0) {
+                dispatch(unFollowAction(userId));
+                dispatch(followingProgress(false, userId));
+            }
+        });
+}
 
 export default userListReducer;
