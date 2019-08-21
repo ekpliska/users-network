@@ -103,7 +103,6 @@ export const follow = (userId) => (dispatch) => {
 }
 
 export const unFollow = (userId) => (dispatch) => {
-    debugger;
     dispatch(followingProgress(true, userId));
     api.unFollowUser(userId)
         .then((data) => {

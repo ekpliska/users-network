@@ -1,3 +1,5 @@
+import api from '../api';
+
 const GET_PROFILE_USER = 'GET_PROFILE_USER';
 
 const initialState = {
@@ -20,5 +22,12 @@ export const getProfileUser = (profile) => ({
     type: GET_PROFILE_USER,
     profile: profile
 });
+
+export const getUser = (userId) => (dispatch) => {
+    api.userProfile(userId)
+        .then((data) => {
+            dispatch(getProfileUser(data))
+        });
+}
 
 export default ProfileReducer;
