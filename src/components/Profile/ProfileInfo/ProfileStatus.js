@@ -6,7 +6,7 @@ class ProfileStatus extends React.Component {
         super(props);
         this.state = {
             editMode: false,
-            localStatus: 'Мой статус'
+            localStatus: this.props.status
         }
         this.editModeOn = this.editModeOn.bind(this);
         this.editModeOff = this.editModeOff.bind(this);
@@ -21,6 +21,14 @@ class ProfileStatus extends React.Component {
     editModeOff() {
         this.setState({
             editMode: false
+        });
+        this.props.onUpdateStatus(this.state.localStatus);
+    }
+
+    onStatusChange = (e) => {
+        const value = e.currentTarget.value;
+        this.setState({
+            localStatus: value
         })
     }
 
@@ -29,8 +37,8 @@ class ProfileStatus extends React.Component {
             <div>
                 {
                     !this.state.editMode
-                        ? <p onDoubleClick={this.editModeOn}>{this.props.status || 'Установить статус'}</p>
-                        : <input onBlur={this.editModeOff} type="text" defaultValue={this.props.status} autoFocus={true} />
+                        ? <p onDoubleClick={this.editModeOn}>{this.state.localStatus || 'Установить статус'}</p>
+                        : <input onBlur={this.editModeOff} onChange={this.onStatusChange} type="text" defaultValue={this.state.localStatus} autoFocus={true} />
                 }
             </div>
         )
