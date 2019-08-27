@@ -1,4 +1,4 @@
-import api from '../api';
+import { profileAPI } from '../api';
 
 const GET_PROFILE_USER = 'GET_PROFILE_USER';
 
@@ -24,7 +24,7 @@ export const getProfileUser = (profile) => ({
 });
 
 export const getUser = (userId) => (dispatch) => {
-    api.userProfile(userId)
+    profileAPI.userProfile(userId)
         .then((data) => {
             dispatch(getProfileUser(data))
         });

@@ -1,4 +1,4 @@
-import api from '../api';
+import { authAPI } from '../api';
 
 const SET_USER_DATA = 'SET_USER_DATA';
 const GET_USER_PROFILE = 'GET_USER_PROFILE';
@@ -44,7 +44,7 @@ export const GetMyProfile = (data) => ({
 })
 
 export const loginThunk = () => (dispatch) => {
-    api.authMe()
+    authAPI.authMe()
         .then((data) => {
             if (data.resultCode === 0) {
                 const { id, login, email } = data.data;

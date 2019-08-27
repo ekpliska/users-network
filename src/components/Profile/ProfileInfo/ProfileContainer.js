@@ -9,7 +9,7 @@ import { compose } from 'redux';
 class ProfileInfoContainer extends React.Component {
 
     componentDidMount() {
-        const userId = this.props.match.params.userId ? this.props.match.params.userId : 2;
+        const userId = this.props.match.params.userId ? this.props.match.params.userId : 1458;
         this.props.getProfile(userId);
     }
 

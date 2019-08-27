@@ -1,4 +1,4 @@
-import api from '../api';
+import { userAPI } from '../api';
 
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
@@ -84,7 +84,7 @@ export const followingProgress = (progress, userId) => ({
 // create thunk
 export const getAllUsers = (currentPage, countUsers) => (dispatch) => {
     return (
-        api.getUsers(currentPage, countUsers)
+        userAPI.getUsers(currentPage, countUsers)
             .then((data) => {
                 dispatch(setUsers(data.items, data.totalCount, currentPage))
             })
@@ -93,7 +93,7 @@ export const getAllUsers = (currentPage, countUsers) => (dispatch) => {
 
 export const follow = (userId) => (dispatch) => {
     dispatch(followingProgress(true, userId));
-    api.followUser(userId)
+    userAPI.followUser(userId)
         .then((data) => {
             if (data.resultCode === 0) {
                 dispatch(followAction(userId));
@@ -104,7 +104,7 @@ export const follow = (userId) => (dispatch) => {
 
 export const unFollow = (userId) => (dispatch) => {
     dispatch(followingProgress(true, userId));
-    api.unFollowUser(userId)
+    userAPI.unFollowUser(userId)
         .then((data) => {
             if (data.resultCode === 0) {
                 dispatch(unFollowAction(userId));
