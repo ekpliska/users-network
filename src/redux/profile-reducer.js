@@ -4,6 +4,7 @@ const GET_PROFILE_USER = 'GET_PROFILE_USER';
 
 const initialState = {
     profile: null,
+    status: ''
 }
 
 const ProfileReducer = (state = initialState, action) => {

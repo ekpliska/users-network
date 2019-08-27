@@ -24,6 +24,7 @@ class ProfileInfoContainer extends React.Component {
 const mapStateToProps = (state) => {
     return {
         profile: state.profileUser.profile,
+        status: state.profileUser.status
     }
 }
 

@@ -4,7 +4,7 @@ import Preloader from '../../../common/Preloader';
 import notFound from '../../../assets/image/user_1.jpg';
 import ProfileStatus from './ProfileStatus';
 
-const ProfileInfo = ({ profile }) => {
+const ProfileInfo = ({ profile, status }) => {
     if (!profile) {
         return (
             <Preloader />
@@ -17,7 +17,8 @@ const ProfileInfo = ({ profile }) => {
             </div>
             <div className={StyleProfileInfo.profileInfo}>
                 <p>Имя: {profile.fullName}</p>
-                <ProfileStatus status={profile.aboutMe} />
+                <p>Обо мне: {profile.aboutMe}</p>
+                <ProfileStatus status={status} />
             </div>
         </div>
     );

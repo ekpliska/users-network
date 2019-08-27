@@ -54,5 +54,18 @@ export const profileAPI = {
                     return response.data
                 })
         )
+    },
+    getUserStatus(userId) {
+        return (
+            initialAPI.get(`/profile/status/${userId}`)
+                .then((response) => {
+                    return response.data
+            })
+        )
+    },
+    setUserStatus(status) {
+        return (
+            initialAPI.put('/profile/status', { status: status })
+        )
     }
 }
