@@ -1,11 +1,18 @@
 import React from 'react';
+import LoginForm from './LoginForm';
 
 const Login = () => {
+
+    const onSubmitForm = (dataForm) => {
+        console.log(dataForm);
+    }
+
     return (
         <div>
             <h1>
-                Login page...
+                Login
             </h1>
+            <LoginForm onSubmit={onSubmitForm} />
         </div>
     )
 }
