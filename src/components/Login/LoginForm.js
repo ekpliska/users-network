@@ -2,12 +2,13 @@ import React from 'react';
 import { Field, reduxForm } from 'redux-form'
 
 const LoginForm = (props) => {
-    const { handleSubmit } = props
+    const { handleSubmit, errorMessages } = props;
+
     return (
         <form onSubmit={handleSubmit}>
-            <label htmlFor="login">Имя</label>
+            <label htmlFor="email">Имя</label>
             <div>
-                <Field name="login" component="input" type="text" />
+                <Field name="email" component="input" type="text" />
             </div>
             <label htmlFor="password">Пароль</label>
             <div>
@@ -18,6 +19,15 @@ const LoginForm = (props) => {
                 <label htmlFor="password">Запомнить меня</label>
             </div>
             <button type="submit">Submit</button>
+            <div>
+                <label>
+                    {
+                        errorMessages.map((error, index) => {
+                            return <p key={index}>{error}</p>
+                        })
+                    }
+                </label>
+            </div>
         </form>
     )
 }

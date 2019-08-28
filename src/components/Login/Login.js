@@ -1,20 +1,43 @@
 import React from 'react';
 import LoginForm from './LoginForm';
+import { signIn } from '../../redux/auth-reducer';
+import { connect } from 'react-redux';
 
-const Login = () => {
+class Login extends React.Component {
 
-    const onSubmitForm = (dataForm) => {
-        console.log(dataForm);
+    constructor(props) {
+        super(props);
+        this.onSubmitForm = this.onSubmitForm.bind(this);
     }
 
-    return (
-        <div>
-            <h1>
-                Login
+    onSubmitForm({ email, password }) {
+        // console.log(dataForm);
+        this.props.signIn(email, password);
+    }
+
+    render() {
+        
+
+        return (
+            <div>
+                <h1>
+                    Login
             </h1>
-            <LoginForm onSubmit={onSubmitForm} />
-        </div>
-    )
+                <LoginForm onSubmit={this.onSubmitForm} {...this.props} />
+            </div>
+        )
+    }
 }
 
-export default Login;
+const mapStateToProps = (state) => {
+    return {
+        errorMessages: state.auth.errors
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        signIn: (email, password) => dispatch(signIn(email, password))
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

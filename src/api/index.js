@@ -16,6 +16,15 @@ export const authAPI = {
                     return response.data
                 })
         )
+    },
+    singIn(email, password) {
+        return (
+            initialAPI.post('/auth/login', { email: email, password: password })
+                .then((response) => {
+                    return response.data
+                })
+
+        )
     }
 }
 
