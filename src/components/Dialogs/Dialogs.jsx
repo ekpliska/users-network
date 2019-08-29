@@ -2,8 +2,9 @@ import React from 'react';
 import StyleDialogs from './Dialogs.module.css';
 import DialogItem from './DialogItem/DialogItem';
 import MessageItem from './MessageItem/MessageItem';
+import DialogForm from './DialogForm';
 
-const Dialogs = ({ users, messages, newDialogMessage, onSendMessage, onChangeMessage }) => {
+const Dialogs = ({ users, messages, onSendMessage }) => {
      
     let userTmplate = users.map((user, index) => {
         return (
@@ -17,15 +18,8 @@ const Dialogs = ({ users, messages, newDialogMessage, onSendMessage, onChangeMes
         );
     });
 
-    let textMessage = React.createRef();
-
-    let changeMessage = () => { 
-        let currentMessage = textMessage.current.value;
-        onChangeMessage(currentMessage);
-    }
-
-    let sendNewMessage = () => { 
-        onSendMessage();
+    const sendNewMessage = ({ messageValue }) => { 
+        onSendMessage(messageValue);
     }
 
     return (
@@ -38,12 +32,7 @@ const Dialogs = ({ users, messages, newDialogMessage, onSendMessage, onChangeMes
                     <div className={StyleDialogs.messageItem}>
                         {messageTemplate}
                         <div>
-                            <div>
-                                <textarea ref={textMessage} onChange={changeMessage} value={newDialogMessage}></textarea>
-                            </div>
-                            <div>
-                                <button onClick={sendNewMessage}>Send</button>
-                            </div>
+                            <DialogForm onSubmit={sendNewMessage} />
                         </div>
                     </div>
                 </div>

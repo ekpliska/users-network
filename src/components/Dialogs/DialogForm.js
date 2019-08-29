@@ -1,20 +1,20 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 
-const PostForm = (props) => {
+const DialogForm = (props) => {
     const { handleSubmit } = props;
     return (
         <form onSubmit={handleSubmit}>
             <div>
-                <Field name="postMessage" component="textarea" type="text" placeholder="Ваше сообщение..." />
+                <Field component="textarea" type="text" name="messageValue"></Field>
             </div>
             <button type="submit">Отправить</button>
         </form>
     )
 }
 
-const PostFormRedux = reduxForm({
-    form: 'addPost'
-})(PostForm);
+const DialogFormRedux = reduxForm({
+    form: 'sendMessage'
+})(DialogForm);
 
-export default PostFormRedux;
+export default DialogFormRedux;
