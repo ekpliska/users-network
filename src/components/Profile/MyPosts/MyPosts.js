@@ -1,8 +1,9 @@
 import React from 'react';
 import Post from './Post/Post';
 import stylesMyPost from './MyPosts.module.css';
+import PostForm from './PostForm';
 
-const MyPosts = ({ posts, addPost, newPostText, updatePosts = f => f }) => {
+const MyPosts = ({ posts, addPost }) => {
     
     let postTemplate = posts.posts.map((post, index) => {
         return (
@@ -10,28 +11,13 @@ const MyPosts = ({ posts, addPost, newPostText, updatePosts = f => f }) => {
         );
     });
 
-    let MessageText = React.createRef();
-
-    let welcomeMessage = () => {
-        let currentText = MessageText.current.value;
-        addPost(currentText);
-    }
-
-    let changeNewPost = () => {
-        let currentText = MessageText.current.value;
-        updatePosts(currentText);
+    const sendPost = ({ postMessage }) => {
+        addPost(postMessage);
     }
 
     return (
         <div className={stylesMyPost.postsContent}>
-            <div>
-                <div>
-                    <textarea ref={MessageText} onChange={changeNewPost} value={newPostText}></textarea>
-                </div>
-                <div>
-                    <button onClick={welcomeMessage}>Add Post</button>
-                </div>
-            </div>
+            <PostForm onSubmit={sendPost} />
             <hr></hr>
             {postTemplate}
         </div>

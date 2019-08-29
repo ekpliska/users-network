@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { getUser, getStatus, updateMyStatus } from '../../../redux/profile-reducer';
 import ProfileInfo from './ProfileInfo';
 import { withRouter } from 'react-router-dom';
-import { WithAuthRedirect } from '../../../hoc/WithAuthRedirect';
 import { compose } from 'redux';
 
 class ProfileInfoContainer extends React.Component {
@@ -39,6 +38,5 @@ const mapDispatchToProps = (dispatch) => {
 
 export default compose(
     connect(mapStateToProps, mapDispatchToProps),
-    withRouter,
-    WithAuthRedirect
+    withRouter
 )(ProfileInfoContainer);
