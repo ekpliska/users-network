@@ -1,0 +1,7 @@
+.formControl.error input {
+    border: 1px solid tomato;
+    background-color: #cccccc;
+}
+.formControl.error span {
+    color: tomato;
+}
