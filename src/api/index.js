@@ -25,6 +25,11 @@ export const authAPI = {
                 })
 
         )
+    },
+    singOut() {
+        return (
+            initialAPI.delete('/auth/login')
+        )
     }
 }
 

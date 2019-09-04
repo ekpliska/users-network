@@ -24,9 +24,11 @@ const LoginForm = (props) => {
             <div>
                 <label>
                     {
-                        errorMessages.map((error, index) => {
-                            return <p key={index}>{error}</p>
-                        })
+                        errorMessages
+                            ? errorMessages.map((error, index) => {
+                                return <p key={index}>{error}</p>
+                            })
+                            : ''
                     }
                 </label>
             </div>

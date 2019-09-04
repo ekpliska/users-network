@@ -2,6 +2,7 @@ import React from 'react';
 import LoginForm from './LoginForm';
 import { signIn } from '../../redux/auth-reducer';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 class Login extends React.Component {
 
@@ -14,9 +15,10 @@ class Login extends React.Component {
         // console.log(dataForm);
         this.props.signIn(email, password);
     }
-
+    
     render() {
         
+        if (this.props.isAuth) return <Redirect to="/login" />
 
         return (
             <div>
@@ -31,7 +33,8 @@ class Login extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        errorMessages: state.auth.errors
+        errorMessages: state.auth.errors,
+        isAuth: state.auth.isAuth
     }
 }
 

@@ -19,7 +19,6 @@ const authReducer = (state = initialState, action) => {
             return {
                 ...state,
                 ...action.data,
-                isAuth: true,
             }
         case GET_USER_PROFILE:
             return {
@@ -37,12 +36,13 @@ const authReducer = (state = initialState, action) => {
     }
 }
 
-export const SetAuthUserData = (userId, login, email) => ({
+export const SetAuthUserData = (userId, login, email, isAuth) => ({
     type: SET_USER_DATA,
     data: {
         userId,
         login,
         email,
+        isAuth
     }
 });
 
@@ -62,7 +62,7 @@ export const loginThunk = () => (dispatch) => {
         .then((data) => {
             if (data.resultCode === 0) {
                 const { id, login, email } = data.data;
-                dispatch(SetAuthUserData(id, login, email));
+                dispatch(SetAuthUserData(id, login, email, true));
             }
         });
 }
@@ -73,8 +73,16 @@ export const signIn = (email, password) => (dispatch) => {
             if (data.resultCode === 1) {
                 dispatch(SignInAction(null, data.messages));
             } else if (data.resultCode === 0) {
-                dispatch(SignInAction(null, data.userId));
+                dispatch(SignInAction(data.userId, null));
+                dispatch(loginThunk());
             }
+        })
+}
+
+export const singOut = () => (dispatch) => {
+    authAPI.singOut()
+        .then(() => {
+            dispatch(SetAuthUserData(null, null, null, false));
         })
 }
 
