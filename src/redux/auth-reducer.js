@@ -1,4 +1,5 @@
 import { authAPI } from '../api';
+import { stopSubmit } from 'redux-form';
 
 const SET_USER_DATA = 'SET_USER_DATA';
 const GET_USER_PROFILE = 'GET_USER_PROFILE';
@@ -10,7 +11,6 @@ const initialState = {
     email: null,
     isAuth: false,
     profile: null,
-    errors: [],
 }
 
 const authReducer = (state = initialState, action) => {
@@ -29,7 +29,6 @@ const authReducer = (state = initialState, action) => {
             return {
                 ...state,
                 userId: action.userId,
-                errors: action.errors
             }
         default:
             return state;
@@ -51,10 +50,9 @@ export const GetMyProfile = (data) => ({
     data: data
 });
 
-export const SignInAction = (userId, errors) => ({
+export const SignInAction = (userId) => ({
     type: SIGN_IN,
-    userId: userId,
-    errors: errors
+    userId: userId
 });
 
 export const loginThunk = () => (dispatch) => {
@@ -71,7 +69,8 @@ export const signIn = (email, password) => (dispatch) => {
     authAPI.singIn(email, password)
         .then((data) => {
             if (data.resultCode === 1) {
-                dispatch(SignInAction(null, data.messages));
+                let errorActionForm = stopSubmit('login', { _error: data.messages[0] ? data.messages[0] : data.messages[1] });
+                dispatch(errorActionForm);
             } else if (data.resultCode === 0) {
                 dispatch(SignInAction(data.userId, null));
                 dispatch(loginThunk());

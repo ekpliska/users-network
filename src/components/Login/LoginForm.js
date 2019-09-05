@@ -4,7 +4,8 @@ import { requiredField } from '../../common/validators/ValidateForm';
 import Input from '../../common/FormElements/Input';
 
 const LoginForm = (props) => {
-    const { handleSubmit, errorMessages } = props;
+    // debugger;
+    const { handleSubmit, error } = props;
 
     return (
         <form onSubmit={handleSubmit}>
@@ -24,11 +25,9 @@ const LoginForm = (props) => {
             <div>
                 <label>
                     {
-                        errorMessages
-                            ? errorMessages.map((error, index) => {
-                                return <p key={index}>{error}</p>
-                            })
-                            : ''
+                        error
+                            ? <span>{error}</span>
+                            : null
                     }
                 </label>
             </div>
