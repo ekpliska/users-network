@@ -25,7 +25,7 @@ const authReducer = (state = initialState, action) => {
                 ...state,
                 profile: action.data
             }
-        case SIGN_IN: 
+        case SIGN_IN:
             return {
                 ...state,
                 userId: action.userId,
@@ -56,13 +56,15 @@ export const SignInAction = (userId) => ({
 });
 
 export const loginThunk = () => (dispatch) => {
-    authAPI.authMe()
-        .then((data) => {
-            if (data.resultCode === 0) {
-                const { id, login, email } = data.data;
-                dispatch(SetAuthUserData(id, login, email, true));
-            }
-        });
+    return (
+        authAPI.authMe()
+            .then((data) => {
+                if (data.resultCode === 0) {
+                    const { id, login, email } = data.data;
+                    dispatch(SetAuthUserData(id, login, email, true));
+                }
+            })
+    )
 }
 
 export const signIn = (email, password) => (dispatch) => {
