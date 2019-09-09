@@ -8,10 +8,10 @@ import { compose } from 'redux';
 class ProfileInfoContainer extends React.Component {
 
     componentDidMount() {
-        const userId = this.props.match.params.userId;
+        let userId = this.props.match.params.userId;
         if (!userId) {
-            const authUserId = this.props.userId;
-            if (!authUserId) {
+            userId = this.props.userId;
+            if (!userId) {
                 this.props.history.push('/login');
             }
         }
