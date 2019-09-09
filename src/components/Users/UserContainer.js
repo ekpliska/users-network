@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { follow, unFollow, getAllUsers, followingProgress } from '../../redux/user-list-reducer';
 import Users from './Users';
+import { getUsersSelector, statusLoading, getCurrentPage, getCountUsers, getTotalCount, getFollowingProgress } from '../../redux/selectors/user-reselect';
 
 class UsersContainer extends React.Component {
 
@@ -39,12 +40,12 @@ class UsersContainer extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        users: state.userListPage.users,
-        isLoading: state.userListPage.isLoading,
-        currentPage: state.userListPage.currentPage,
-        countUsers: state.userListPage.countUsers,
-        totalCount: state.userListPage.totalCount,
-        progress: state.userListPage.followingProgress,
+        users: getUsersSelector(state),
+        isLoading: statusLoading(state),
+        currentPage: getCurrentPage(state),
+        countUsers: getCountUsers(state),
+        totalCount: getTotalCount(state),
+        progress: getFollowingProgress(state),
     }
 }
 
