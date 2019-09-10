@@ -1,56 +1,41 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
-class ProfileStatus extends React.Component {
+const ProfileStatus = (props) => {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            editMode: false,
-            localStatus: this.props.status
-        }
-        this.editModeOn = this.editModeOn.bind(this);
-        this.editModeOff = this.editModeOff.bind(this);
+    let [editMode, changeEditMode] = useState(false);
+    let [status, changeUserStatus] = useState(props.status);
+
+    useEffect(() => {
+        changeUserStatus(status)
+    }, [props.status]);
+
+    const editModeOn = () => {
+        changeEditMode(true);
     }
 
-    componentDidUpdate(prevProps, prevState) {
-        if (this.props.status !== prevProps.status) {
-            this.setState({
-                localStatus: this.props.status
-            });
-        }
+    const editModeOff = () => {
+        changeEditMode(false);
+        props.onUpdateStatus(status);
     }
 
-    editModeOn() {
-        this.setState({
-            editMode: true,
-        });
+    const onStatusChange = (e) => {
+        changeUserStatus(e.currentTarget.value);
     }
 
-    editModeOff() {
-        this.setState({
-            editMode: false
-        });
-        this.props.onUpdateStatus(this.state.localStatus);
-    }
-
-    onStatusChange = (e) => {
-        const value = e.currentTarget.value;
-        this.setState({
-            localStatus: value
-        })
-    }
-
-    render() {
-        return (
-            <div>
-                {
-                    !this.state.editMode
-                        ? <p onDoubleClick={this.editModeOn}>{this.state.localStatus || 'Установить статус'}</p>
-                        : <input onBlur={this.editModeOff} onChange={this.onStatusChange} type="text" defaultValue={this.state.localStatus} autoFocus={true} />
-                }
-            </div>
-        )
-    }
+    return (
+        <div>
+            {
+                !editMode
+                    ? <p onDoubleClick={editModeOn}>{status || 'Установить статус'}</p>
+                    : <input
+                        onBlur={editModeOff}
+                        onChange={onStatusChange}
+                        type="text"
+                        defaultValue={status}
+                        autoFocus={true} />
+            }
+        </div>
+    )
 }
 
 export default ProfileStatus;
