@@ -1,4 +1,5 @@
 import React from 'react';
+import { Field } from 'redux-form';
 import StyleForm from './FormElements.module.css';
 
 const Input = ({ input, meta, ...props }) => {
@@ -9,6 +10,15 @@ const Input = ({ input, meta, ...props }) => {
             {
                 hasError && <span>{meta.error}</span>
             }
+        </div>
+    )
+}
+
+export const createdField = (label, name, validators, component, props, typeInput) => {
+    return (
+        <div>
+            <label htmlFor={name}>{label}</label>
+            <Field name={name} component={component} validate={validators} type={typeInput} />
         </div>
     )
 }

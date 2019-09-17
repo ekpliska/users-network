@@ -41,24 +41,3 @@
     color: #fff;
     outline: none;
 }
-
-.pagination {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    width: 70%;
-    margin-left: 15%;
-}
-.pagination li {
-    float: left;
-    margin: 2px;
-    padding: 5px;
-    font-size: 12px;
-    cursor: pointer;
-}
-.active {
-    background-color: #fff;
-    border-radius: 50px;
-    font-weight: bold;
-}

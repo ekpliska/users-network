@@ -1,7 +1,7 @@
 import React from 'react';
-import { Field, reduxForm } from 'redux-form'
+import { reduxForm } from 'redux-form'
 import { requiredField } from '../../common/validators/ValidateForm';
-import Input from '../../common/FormElements/Input';
+import Input, { createdField } from '../../common/FormElements/Input';
 
 const LoginForm = (props) => {
     // debugger;
@@ -9,18 +9,9 @@ const LoginForm = (props) => {
 
     return (
         <form onSubmit={handleSubmit}>
-            <label htmlFor="email">Имя</label>
-            <div>
-                <Field name={"email"} component={Input} type="text" validate={[requiredField]} />
-            </div>
-            <label htmlFor="password">Пароль</label>
-            <div>
-                <Field name={"password"} component={Input} type="text" validate={[requiredField]}/>
-            </div>
-            <div>
-                <Field name="password" component="input" type="checkbox" />
-                <label htmlFor="password">Запомнить меня</label>
-            </div>
+            {createdField("Email", "email", [requiredField], Input, null, "text")}
+            {createdField("Пароль", "password", [requiredField], Input, null, "password")}
+            {createdField("Запомнить меня", "rememberme", null, Input, null, "checkbox")}
             <button type="submit">Войти</button>
             <div>
                 <label>

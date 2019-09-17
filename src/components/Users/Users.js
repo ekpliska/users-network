@@ -1,38 +1,15 @@
 import React from 'react';
 import User from './User';
-import UserStyle from './User.module.css';
 import Preloader from '../../common/Preloader';
+import { Pagination } from '../../common/Pagination/Pagination';
 
 const Users = (props) => {
 
     const { users, isLoading, onFollowClick, onUnFollowClick, allUsers, totalCount, countUsers, currentPage, progress } = props;
-    const countPages = Math.ceil(totalCount / countUsers);
-
-    let arrayPages = [];
-    for (let i = 1; i <= countPages; i++) {
-        arrayPages.push(i);
-    }
 
     return (
         <React.Fragment>
-            <ul className={UserStyle.pagination}>
-                {
-                    arrayPages.map(number => {
-                        return (
-                            <li
-                                className={currentPage === number ?
-                                    UserStyle.active : ''}
-                                key={number}
-                                onClick={() => props.changePage(number)}
-                            >
-
-                                {number}
-
-                            </li>
-                        )
-                    })
-                }
-            </ul>
+            <Pagination totalCount={totalCount} countUsers={countUsers} currentPage={currentPage} changePage={props.changePage} />
             <div>
                 {
                     (isLoading === false)
