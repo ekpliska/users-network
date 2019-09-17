@@ -57,25 +57,23 @@ export const SignInAction = (userId) => ({
 
 export const loginThunk = () => (dispatch) => {
     return authAPI.authMe()
-            .then((data) => {
-                if (data.resultCode === 0) {
-                    const { id, login, email } = data.data;
-                    dispatch(SetAuthUserData(id, login, email, true));
-                }
-            })
-}
-
-export const signIn = (email, password) => (dispatch) => {
-    authAPI.singIn(email, password)
         .then((data) => {
-            if (data.resultCode === 1) {
-                let errorActionForm = stopSubmit('login', { _error: data.messages[0] ? data.messages[0] : data.messages[1] });
-                dispatch(errorActionForm);
-            } else if (data.resultCode === 0) {
-                dispatch(SignInAction(data.userId, null));
-                dispatch(loginThunk());
+            if (data.resultCode === 0) {
+                const { id, login, email } = data.data;
+                dispatch(SetAuthUserData(id, login, email, true));
             }
         })
+}
+
+export const signIn = (email, password) => async (dispatch) => {
+    let data = await authAPI.singIn(email, password)
+    if (data.resultCode === 1) {
+        let errorActionForm = stopSubmit('login', { _error: data.messages[0] ? data.messages[0] : data.messages[1] });
+        dispatch(errorActionForm);
+    } else if (data.resultCode === 0) {
+        dispatch(SignInAction(data.userId, null));
+        dispatch(loginThunk());
+    }
 }
 
 export const singOut = () => (dispatch) => {

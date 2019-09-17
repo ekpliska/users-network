@@ -49,7 +49,7 @@ const userListReducer = (state = initialState, action) => {
             return {
                 ...state,
                 followingProgress: action.progress
-                    ? [...state.followingProgress, action.userId] 
+                    ? [...state.followingProgress, action.userId]
                     : state.followingProgress.filter((userId) => userId !== action.userId)
             }
         }
@@ -82,35 +82,27 @@ export const followingProgress = (progress, userId) => ({
 });
 
 // create thunk
-export const getAllUsers = (currentPage, countUsers) => (dispatch) => {
-    return (
-        userAPI.getUsers(currentPage, countUsers)
-            .then((data) => {
-                dispatch(setUsers(data.items, data.totalCount, currentPage))
-            })
-    )
+export const getAllUsers = (currentPage, countUsers) => async (dispatch) => {
+    const data = await userAPI.getUsers(currentPage, countUsers)
+    return dispatch(setUsers(data.items, data.totalCount, currentPage))
 }
 
-export const follow = (userId) => (dispatch) => {
+export const follow = (userId) => async (dispatch) => {
     dispatch(followingProgress(true, userId));
-    userAPI.followUser(userId)
-        .then((data) => {
-            if (data.resultCode === 0) {
-                dispatch(followAction(userId));
-                dispatch(followingProgress(false, userId));
-            }
-        });
+    const data = await userAPI.followUser(userId);
+    if (data.resultCode === 0) {
+        dispatch(followAction(userId));
+        dispatch(followingProgress(false, userId));
+    }
 }
 
-export const unFollow = (userId) => (dispatch) => {
+export const unFollow = (userId) => async (dispatch) => {
     dispatch(followingProgress(true, userId));
-    userAPI.unFollowUser(userId)
-        .then((data) => {
-            if (data.resultCode === 0) {
-                dispatch(unFollowAction(userId));
-                dispatch(followingProgress(false, userId));
-            }
-        });
+    const data = userAPI.unFollowUser(userId)
+    if (data.resultCode === 0) {
+        dispatch(unFollowAction(userId));
+        dispatch(followingProgress(false, userId));
+    }
 }
 
 export default userListReducer;
