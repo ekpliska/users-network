@@ -1,14 +1,20 @@
 .profile {
-    height: 150px;
+    height: 300px;
     background-color: #fff;
     display: grid;
-    grid-template-columns: 30% 80%;
+    grid-template-columns: 30% 40% 30%;
     padding: 10px;
 }
+
 .profileImage img {
     background-color: brown;
     height: 150px;
 }
+
 .profileInfo {
+    padding: 0 20px;
+}
+
+.profileContact {
     padding: 0 20px;
 }
