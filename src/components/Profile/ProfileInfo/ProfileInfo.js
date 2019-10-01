@@ -13,6 +13,11 @@ const ProfileInfo = ({ profile, status, updateStatus, isOwner }) => {
         return changeEditMode(true)
     }
 
+    const onSubmitForm = (dataForm) => {
+        console.log(dataForm);
+        // this.props.signIn(email, password);
+    }
+
     if (!profile) {
         return (
             <Preloader />
@@ -25,7 +30,7 @@ const ProfileInfo = ({ profile, status, updateStatus, isOwner }) => {
             </div>
             {
                 editMode 
-                    ? <ProfileForm profile={profile} />
+                    ? <ProfileForm profile={profile} onSubmit={onSubmitForm} />
                     : <ProfileData
                             status={status}
                             updateStatus={updateStatus}

@@ -5,9 +5,19 @@ import TextArea from '../../../common/FormElements/TextArea';
 import StyleProfileInfo from './ProfileInfo.module.css';
 
 const ProfileForm = (props) => {
+    const { handleSubmit, error } = props;
+
     return (
-        <form className={StyleProfileInfo.profileFormEdit}>
+        <form className={StyleProfileInfo.profileFormEdit} onSubmit={handleSubmit}>
             <div className={StyleProfileInfo.profileInfo}>
+                <button type="submit">Сохранить</button>
+                <label>
+                    {
+                        error
+                            ? <span>{error}</span>
+                            : null
+                    }
+                </label>
                 {createdField("Имя", "fullName", [], Input, null, "text")}
                 {createdField("В поиске работы", "lookingForAJob", [], Input, null, "checkbox")}
                 {createdField("Мои навыки", "lookingForAJobDescription", [], TextArea, null, "checkbox")}
@@ -20,7 +30,6 @@ const ProfileForm = (props) => {
                                 {createdField(key, `contacts.${key}`, [], Input, null, "text")}
                             </div>
                         )
-                        // return <Contact key={key} contactTitle={key} contactValue={props.profile.contacts[key]} />
                     })
                 }
             </div>
