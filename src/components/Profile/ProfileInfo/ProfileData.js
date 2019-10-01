@@ -14,6 +14,9 @@ const ProfileData = (props) => {
     return (
         <React.Fragment>
             <div className={StyleProfileInfo.profileInfo}>
+                {
+                    props.isOwner && <button onClick={props.onEdit}>Редактировать</button>
+                }
                 <p>Имя: {props.profile.fullName}</p>
                 <ProfileStatus status={props.status} onUpdateStatus={props.updateStatus} />
                 <p>В поиске работы: {props.profile.lookingForAJob}</p>

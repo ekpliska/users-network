@@ -6,6 +6,14 @@
     padding: 10px;
 }
 
+.profileForm {
+    height: 400px;
+    background-color: #fff;
+    display: grid;
+    grid-template-columns: 30% 70%;
+    padding: 10px;
+}
+
 .profileImage img {
     background-color: brown;
     height: 150px;
@@ -17,4 +25,10 @@
 
 .profileContact {
     padding: 0 20px;
+}
+
+.profileFormEdit {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 50% 50%;
 }

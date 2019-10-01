@@ -19,17 +19,20 @@ const ProfileInfo = ({ profile, status, updateStatus, isOwner }) => {
         )
     }
     return (
-        <div className={StyleProfileInfo.profile}>
+        <div className={!editMode ? StyleProfileInfo.profile : StyleProfileInfo.profileForm}>
             <div className={StyleProfileInfo.profileImage}>
                 <img src={profile.photos.small ? profile.photos.small : notFound} alt=""></img>
-                {
-                    isOwner && <button onClick={onEdit}>Редактировать</button>
-                }
             </div>
             {
                 editMode 
-                    ? <ProfileForm />
-                    : <ProfileData status={status} updateStatus={updateStatus} profile={profile} />
+                    ? <ProfileForm profile={profile} />
+                    : <ProfileData
+                            status={status}
+                            updateStatus={updateStatus}
+                            profile={profile}
+                            isOwner={isOwner}
+                            onEdit={onEdit}
+                    />
             }
             
         </div>
