@@ -84,5 +84,13 @@ export const profileAPI = {
                     return response.data
                 })
         )
+    },
+    updateUserProfile(profile) {
+        return (
+            initialAPI.put('/profile', profile)
+                .then((response) => {
+                    return response.data
+            })
+        )
     }
 }

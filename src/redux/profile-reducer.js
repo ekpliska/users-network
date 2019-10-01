@@ -52,4 +52,12 @@ export const updateMyStatus = (status) => async (dispatch) => {
     }
 }
 
+export const updateProfile = (profile) => async (dispatch) => {
+
+    const data = await profileAPI.updateUserProfile(profile);
+    if (data.resultCode === 0) {
+        dispatch(getProfileUser(data))
+    }
+}
+
 export default ProfileReducer;

@@ -5,7 +5,7 @@ import notFound from '../../../assets/image/user_1.jpg';
 import ProfileData from './ProfileData';
 import ProfileForm from './ProfileForm';
 
-const ProfileInfo = ({ profile, status, updateStatus, isOwner }) => {
+const ProfileInfo = ({ profile, status, updateStatus, isOwner, updateProfile }) => {
 
     const [editMode, changeEditMode] = useState(false);
 
@@ -14,8 +14,11 @@ const ProfileInfo = ({ profile, status, updateStatus, isOwner }) => {
     }
 
     const onSubmitForm = (dataForm) => {
+        updateProfile(dataForm)
+            .then(() => {
+                changeEditMode(false)
+            });
         console.log(dataForm);
-        // this.props.signIn(email, password);
     }
 
     if (!profile) {
@@ -26,11 +29,12 @@ const ProfileInfo = ({ profile, status, updateStatus, isOwner }) => {
     return (
         <div className={!editMode ? StyleProfileInfo.profile : StyleProfileInfo.profileForm}>
             <div className={StyleProfileInfo.profileImage}>
-                <img src={profile.photos.small ? profile.photos.small : notFound} alt=""></img>
+                {/* <img src={profile.photos.small ? profile.photos.small : notFound} alt=""></img> */}
+                <img src={notFound} alt=""></img>
             </div>
             {
                 editMode 
-                    ? <ProfileForm profile={profile} onSubmit={onSubmitForm} />
+                    ? <ProfileForm initialValues={profile} profile={profile} onSubmit={onSubmitForm} />
                     : <ProfileData
                             status={status}
                             updateStatus={updateStatus}

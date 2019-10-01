@@ -20,7 +20,8 @@ const ProfileForm = (props) => {
                 </label>
                 {createdField("Имя", "fullName", [], Input, null, "text")}
                 {createdField("В поиске работы", "lookingForAJob", [], Input, null, "checkbox")}
-                {createdField("Мои навыки", "lookingForAJobDescription", [], TextArea, null, "checkbox")}
+                {createdField("Мои навыки", "lookingForAJobDescription", [], TextArea, null, "textarea")}
+                {createdField("Обо мне", "aboutMe", [], TextArea, null, "textarea")}
             </div>
             <div className={StyleProfileInfo.profileContact}>
                 {
