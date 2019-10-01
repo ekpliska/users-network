@@ -1,18 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import StyleProfileInfo from './ProfileInfo.module.css';
 import Preloader from '../../../common/Preloader';
 import notFound from '../../../assets/image/user_1.jpg';
-import ProfileStatus from './ProfileStatus';
-
-const Contact = ({ contactTitle, contactValue }) => {
-    return (
-        <div>
-            <p>{contactTitle}: {contactValue}</p>
-        </div>
-    )
-}
+import ProfileData from './ProfileData';
+import ProfileForm from './ProfileForm';
 
 const ProfileInfo = ({ profile, status, updateStatus }) => {
+
+    const [editMode, changeEditMode] = useState(false);
+
     if (!profile) {
         return (
             <Preloader />
@@ -21,21 +17,15 @@ const ProfileInfo = ({ profile, status, updateStatus }) => {
     return (
         <div className={StyleProfileInfo.profile}>
             <div className={StyleProfileInfo.profileImage}>
-                <img src={profile.photos.small ? profile.photos.small : notFound } alt=""></img>
+                <img src={profile.photos.small ? profile.photos.small : notFound} alt=""></img>
+                <button onClick={() => changeEditMode(true)}>Редактировать</button>
             </div>
-            <div className={StyleProfileInfo.profileInfo}>
-                <p>Имя: {profile.fullName}</p>
-                <ProfileStatus status={status} onUpdateStatus={updateStatus} />
-                <p>В поиске работы: {profile.lookingForAJob}</p>
-                <p>Мои навыки: {profile.lookingForAJobDescription}</p>
-            </div>
-            <div className={StyleProfileInfo.profileContact}>
-                {
-                    Object.keys(profile.contacts).map(key => {
-                        return <Contact key={key} contactTitle={key} contactValue={profile.contacts[key]} />
-                    })
-                }
-            </div>
+            {
+                editMode 
+                    ? <ProfileForm />
+                    : <ProfileData status={status} updateStatus={updateStatus} profile={profile} />
+            }
+            
         </div>
     );
 }
