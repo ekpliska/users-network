@@ -5,9 +5,13 @@ import notFound from '../../../assets/image/user_1.jpg';
 import ProfileData from './ProfileData';
 import ProfileForm from './ProfileForm';
 
-const ProfileInfo = ({ profile, status, updateStatus }) => {
+const ProfileInfo = ({ profile, status, updateStatus, isOwner }) => {
 
     const [editMode, changeEditMode] = useState(false);
+
+    const onEdit = () => {
+        return changeEditMode(true)
+    }
 
     if (!profile) {
         return (
@@ -18,7 +22,9 @@ const ProfileInfo = ({ profile, status, updateStatus }) => {
         <div className={StyleProfileInfo.profile}>
             <div className={StyleProfileInfo.profileImage}>
                 <img src={profile.photos.small ? profile.photos.small : notFound} alt=""></img>
-                <button onClick={() => changeEditMode(true)}>Редактировать</button>
+                {
+                    isOwner && <button onClick={onEdit}>Редактировать</button>
+                }
             </div>
             {
                 editMode 

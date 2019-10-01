@@ -21,7 +21,7 @@ class ProfileInfoContainer extends React.Component {
 
     render() {
         return (
-            <ProfileInfo {...this.props} />
+            <ProfileInfo {...this.props} isOwner={!this.props.match.params.userId} />
         )
     }
 
