@@ -32,3 +32,12 @@
     display: grid;
     grid-template-columns: 50% 50%;
 }
+
+.profileFormErrors {
+    display: block;
+}
+
+.profileFormErrors label {
+    font-size: 10px;
+    color: coral;
+}

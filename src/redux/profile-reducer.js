@@ -1,4 +1,5 @@
 import { profileAPI } from '../api';
+import { stopSubmit } from "redux-form";
 
 const GET_PROFILE_USER = 'GET_PROFILE_USER';
 const SET_USER_STATUS = 'GET_USER_STATUS';
@@ -52,11 +53,15 @@ export const updateMyStatus = (status) => async (dispatch) => {
     }
 }
 
-export const updateProfile = (profile) => async (dispatch) => {
-
+export const updateProfile = (profile) => async (dispatch, getState) => {
+    const userId = getState().auth.userId;
     const data = await profileAPI.updateUserProfile(profile);
     if (data.resultCode === 0) {
-        dispatch(getProfileUser(data))
+        dispatch(getUser(userId))
+    } else {
+        // debugger;
+        dispatch(stopSubmit("edit-profile", { _error: data.messages[0] }));
+        return Promise.reject(data.messages[0]);
     }
 }
 

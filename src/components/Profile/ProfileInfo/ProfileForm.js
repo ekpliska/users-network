@@ -4,20 +4,20 @@ import Input, { createdField } from '../../../common/FormElements/Input';
 import TextArea from '../../../common/FormElements/TextArea';
 import StyleProfileInfo from './ProfileInfo.module.css';
 
-const ProfileForm = (props) => {
-    const { handleSubmit, error } = props;
-
+const ProfileForm = ({ handleSubmit, error, profile}) => {
     return (
         <form className={StyleProfileInfo.profileFormEdit} onSubmit={handleSubmit}>
             <div className={StyleProfileInfo.profileInfo}>
                 <button type="submit">Сохранить</button>
-                <label>
-                    {
-                        error
-                            ? <span>{error}</span>
-                            : null
-                    }
-                </label>
+                <div className={StyleProfileInfo.profileFormErrors}>
+                    <label>
+                        {
+                            error
+                                ? <span>{error}</span>
+                                : null
+                        }
+                    </label>
+                </div>
                 {createdField("Имя", "fullName", [], Input, null, "text")}
                 {createdField("В поиске работы", "lookingForAJob", [], Input, null, "checkbox")}
                 {createdField("Мои навыки", "lookingForAJobDescription", [], TextArea, null, "textarea")}
@@ -25,10 +25,10 @@ const ProfileForm = (props) => {
             </div>
             <div className={StyleProfileInfo.profileContact}>
                 {
-                    Object.keys(props.profile.contacts).map(key => {
+                    Object.keys(profile.contacts).map(key => {
                         return (
                             <div key={key}>
-                                {createdField(key, `contacts.${key}`, [], Input, null, "text")}
+                                {createdField(key, `contacts.${key}`, null, Input, null, "text")}
                             </div>
                         )
                     })
