@@ -11,7 +11,7 @@ const LoginForm = (props) => {
             {createdField("Email", "email", [requiredField], Input, null, "text")}
             {createdField("Пароль", "password", [requiredField], Input, null, "password")}
             {createdField("Запомнить меня", "rememberme", null, Input, null, "checkbox")}
-            {captchaUrl && <img style={{ width: '120px' }} src={captchaUrl} alt="captcha-image" />}
+            {captchaUrl && <img style={{ width: '120px' }} src={captchaUrl} alt="" />}
             {captchaUrl && createdField("", "captcha", [requiredField], Input)}
             <button type="submit">Войти</button>
             <div>

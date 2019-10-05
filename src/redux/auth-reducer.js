@@ -75,16 +75,16 @@ export const loginThunk = () => (dispatch) => {
 
 export const signIn = (email, password, captcha) => async (dispatch) => {
     let data = await authAPI.singIn(email, password, captcha)
-    if (data.resultCode === 1) {
-        let errorActionForm = stopSubmit('login', { _error: data.messages[0] ? data.messages[0] : data.messages[1] });
-        dispatch(errorActionForm);
-    } else if (data.resultCode === 0) {
+
+    if (data.resultCode === 0) {
         dispatch(SignInAction(data.userId, null));
         dispatch(loginThunk());
-    } else if (data.resultCode === 10) {
+    } else {
+        if (data.resultCode === 10) { 
+            dispatch(getCaptchaUrl());
+        }
         let errorActionForm = stopSubmit('login', { _error: data.messages[0] ? data.messages[0] : data.messages[1] });
         dispatch(errorActionForm);
-        dispatch(getCaptchaUrl());
     }
 }
 
