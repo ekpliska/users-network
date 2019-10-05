@@ -106,3 +106,11 @@ export const profileAPI = {
         )
     }
 }
+
+export const securityAPI = {
+    getCaptchaUrl() {
+        return (
+            initialAPI.get('/security/get-captcha-url')
+        )
+    }
+}
