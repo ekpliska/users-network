@@ -17,9 +17,9 @@ export const authAPI = {
                 })
         )
     },
-    singIn(email, password) {
+    singIn(email, password, captcha = null) {
         return (
-            initialAPI.post('/auth/login', { email: email, password: password })
+            initialAPI.post('/auth/login', { email: email, password: password, captcha: captcha })
                 .then((response) => {
                     return response.data
                 })

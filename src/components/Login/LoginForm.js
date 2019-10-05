@@ -4,14 +4,15 @@ import { requiredField } from '../../common/validators/ValidateForm';
 import Input, { createdField } from '../../common/FormElements/Input';
 
 const LoginForm = (props) => {
-    // debugger;
-    const { handleSubmit, error } = props;
+    const { handleSubmit, error, captchaUrl } = props;
 
     return (
         <form onSubmit={handleSubmit}>
             {createdField("Email", "email", [requiredField], Input, null, "text")}
             {createdField("Пароль", "password", [requiredField], Input, null, "password")}
             {createdField("Запомнить меня", "rememberme", null, Input, null, "checkbox")}
+            {captchaUrl && <img style={{ width: '120px' }} src={captchaUrl} alt="captcha-image" />}
+            {captchaUrl && createdField("", "captcha", [requiredField], Input)}
             <button type="submit">Войти</button>
             <div>
                 <label>

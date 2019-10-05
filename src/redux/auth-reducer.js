@@ -12,7 +12,7 @@ const initialState = {
     email: null,
     isAuth: false,
     profile: null,
-    captcha: null,
+    captchaUrl: null,
 }
 
 const authReducer = (state = initialState, action) => {
@@ -73,17 +73,18 @@ export const loginThunk = () => (dispatch) => {
         })
 }
 
-export const signIn = (email, password) => async (dispatch) => {
-    let data = await authAPI.singIn(email, password)
+export const signIn = (email, password, captcha) => async (dispatch) => {
+    let data = await authAPI.singIn(email, password, captcha)
     if (data.resultCode === 1) {
-        if (data.resultCode === 10) {
-            dispatch(getCaptchaUrl());
-        }
         let errorActionForm = stopSubmit('login', { _error: data.messages[0] ? data.messages[0] : data.messages[1] });
         dispatch(errorActionForm);
     } else if (data.resultCode === 0) {
         dispatch(SignInAction(data.userId, null));
         dispatch(loginThunk());
+    } else if (data.resultCode === 10) {
+        let errorActionForm = stopSubmit('login', { _error: data.messages[0] ? data.messages[0] : data.messages[1] });
+        dispatch(errorActionForm);
+        dispatch(getCaptchaUrl());
     }
 }
 

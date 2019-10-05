@@ -11,9 +11,9 @@ class Login extends React.Component {
         this.onSubmitForm = this.onSubmitForm.bind(this);
     }
 
-    onSubmitForm({ email, password }) {
+    onSubmitForm({ email, password, captcha }) {
         // console.log(dataForm);
-        this.props.signIn(email, password);
+        this.props.signIn(email, password, captcha);
     }
     
     render() {
@@ -34,13 +34,14 @@ class Login extends React.Component {
 const mapStateToProps = (state) => {
     return {
         errorMessages: state.auth.errors,
-        isAuth: state.auth.isAuth
+        isAuth: state.auth.isAuth,
+        captchaUrl: state.auth.captchaUrl,
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        signIn: (email, password) => dispatch(signIn(email, password))
+        signIn: (email, password, captcha) => dispatch(signIn(email, password, captcha))
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
