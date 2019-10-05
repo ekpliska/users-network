@@ -92,5 +92,17 @@ export const profileAPI = {
                     return response.data
             })
         )
+    },
+    saveMyAvatar(photoFile) {
+        const formData = new FormData();
+        formData.append("image", photoFile);
+
+        return (
+            initialAPI.put('/profile/photo', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            })
+        )
     }
 }

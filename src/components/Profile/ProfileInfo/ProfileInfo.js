@@ -5,7 +5,7 @@ import notFound from '../../../assets/image/user_1.jpg';
 import ProfileData from './ProfileData';
 import ProfileForm from './ProfileForm';
 
-const ProfileInfo = ({ profile, status, updateStatus, isOwner, updateProfile }) => {
+const ProfileInfo = ({ profile, status, updateStatus, isOwner, updateProfile, savePhoto }) => {
 
     const [editMode, changeEditMode] = useState(false);
 
@@ -21,6 +21,13 @@ const ProfileInfo = ({ profile, status, updateStatus, isOwner, updateProfile }) 
         console.log(dataForm);
     }
 
+    const onUploadPhoto = (event) => {
+        let file = event.target.files[0];
+        if (file) {
+            savePhoto(file);
+        }
+    }
+
     if (!profile) {
         return (
             <Preloader />
@@ -29,8 +36,9 @@ const ProfileInfo = ({ profile, status, updateStatus, isOwner, updateProfile }) 
     return (
         <div className={!editMode ? StyleProfileInfo.profile : StyleProfileInfo.profileForm}>
             <div className={StyleProfileInfo.profileImage}>
-                {/* <img src={profile.photos.small ? profile.photos.small : notFound} alt=""></img> */}
-                <img src={notFound} alt=""></img>
+                <img src={profile.photos.small ? profile.photos.small : notFound} alt=""></img>
+                {isOwner && <input type="file" onChange={onUploadPhoto} />}
+                {/* <img src={notFound} alt=""></img> */}
             </div>
             {
                 editMode 
